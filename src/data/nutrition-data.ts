@@ -6,7 +6,7 @@ export const nutritionData: NutritionPlan = {
     pais: "Argentina",
     criterios: ["barato", "rapido", "rico"],
     version: "1.0.0",
-    notas_generales: "Porciones pensadas para 1 adulto activo (~136 kg) que entrena BJJ 3-4x/sem y camina diario. Ajustá cantidades según hambre real y objetivos indicados por tu nutricionista. Cociná en batch el finde cuando se marque 'freezar'. Usa vegetales de estación y marcas económicas."
+    notas_generales: "Ajustá cantidades según hambre real y objetivos indicados por tu nutricionista. Cociná en batch el finde cuando se marque 'freezar'. Usa vegetales de estación y marcas económicas."
   },
   opciones_generales: {
     desayuno: [
@@ -142,13 +142,28 @@ export const nutritionData: NutritionPlan = {
       almuerzo: {
         ref: "wok_veg_arroz_pollo",
         nota: "Usá pollo en oferta (muslo deshuesado) + verduras de estación congeladas.",
-        calorias: 580
+        calorias: 580,
+        ingredientes: [
+          { nombre: "Arroz blanco cocido", cantidad: "150g", calorias: 180, carbohidratos: 40 },
+          { nombre: "Pollo (muslo deshuesado)", cantidad: "120g", calorias: 180, proteinas: 22, grasas: 8 },
+          { nombre: "Verduras salteadas", cantidad: "120g", calorias: 50, carbohidratos: 10 },
+          { nombre: "Aceite mezcla", cantidad: "1 cda (10g)", calorias: 90, grasas: 10 },
+          { nombre: "Salsa de soja light", cantidad: "1 cda (15ml)", calorias: 10 },
+          { nombre: "Semillas (opcional)", cantidad: "10g", calorias: 30, grasas: 3 }
+        ]
       },
       merienda: "merienda_tostada_queso",
       cena: {
         ref: "tacos_pollo_queso",
         nota: "Tortillas rapiditas; rinde con sobras del wok.",
-        calorias: 480
+        calorias: 480,
+        ingredientes: [
+          { nombre: "Tortilla de trigo", cantidad: "2 unidades (60g)", calorias: 160, carbohidratos: 32 },
+          { nombre: "Pechuga de pollo", cantidad: "80g", calorias: 120, proteinas: 20, grasas: 2 },
+          { nombre: "Queso port salut", cantidad: "30g", calorias: 90, proteinas: 7, grasas: 5 },
+          { nombre: "Verduras salteadas", cantidad: "80g", calorias: 40, carbohidratos: 8 },
+          { nombre: "Aceite", cantidad: "1 cdita (5g)", calorias: 45, grasas: 5 }
+        ]
       }
     },
     miercoles: {
@@ -157,13 +172,27 @@ export const nutritionData: NutritionPlan = {
         ref: "milanesa_pollo_avena",
         prep_batch_freezar: true,
         nota: "Empaná varias pechugas/muslo molido + avena molida; horneá y freezá.",
-        calorias: 520
+        calorias: 520,
+        ingredientes: [
+          { nombre: "Pechuga de pollo", cantidad: "100g", calorias: 120, proteinas: 22, grasas: 2 },
+          { nombre: "Avena molida", cantidad: "30g", calorias: 110, carbohidratos: 20, proteinas: 4 },
+          { nombre: "Huevo", cantidad: "1 unidad", calorias: 70, proteinas: 6, grasas: 5 },
+          { nombre: "Aceite", cantidad: "1 cda (10g)", calorias: 90, grasas: 10 },
+          { nombre: "Ensalada mixta", cantidad: "150g", calorias: 40, carbohidratos: 8 }
+        ]
       },
       merienda: "merienda_inf_pancake",
       cena: {
         ref: "sandwich_integral_atun",
         nota: "Atún en lata al natural (marca económica); mezcla con zanahoria rallada.",
-        calorias: 380
+        calorias: 380,
+        ingredientes: [
+          { nombre: "Pan integral", cantidad: "2 rebanadas (60g)", calorias: 160, carbohidratos: 30, proteinas: 6 },
+          { nombre: "Atún al natural", cantidad: "1 lata (80g)", calorias: 90, proteinas: 18, grasas: 1 },
+          { nombre: "Queso untable descremado", cantidad: "20g", calorias: 30, proteinas: 2, grasas: 2 },
+          { nombre: "Zanahoria rallada", cantidad: "40g", calorias: 15, carbohidratos: 3 },
+          { nombre: "Ensalada verde", cantidad: "80g", calorias: 20, carbohidratos: 4 }
+        ]
       }
     },
     jueves: {
@@ -172,13 +201,28 @@ export const nutritionData: NutritionPlan = {
         ref: "hamburguesa_lentejas",
         prep_batch_freezar: true,
         nota: "Usá lentejas secas (baratas); hacé medallones y freezá.",
-        calorias: 450
+        calorias: 450,
+        ingredientes: [
+          { nombre: "Lentejas cocidas", cantidad: "120g", calorias: 140, carbohidratos: 24, proteinas: 9 },
+          { nombre: "Queso port salut", cantidad: "30g", calorias: 90, proteinas: 7, grasas: 5 },
+          { nombre: "Pan integral", cantidad: "1 unidad (40g)", calorias: 100, carbohidratos: 20, proteinas: 3 },
+          { nombre: "Ensalada mixta", cantidad: "100g", calorias: 30, carbohidratos: 6 },
+          { nombre: "Aceite", cantidad: "1 cdita (5g)", calorias: 45, grasas: 5 },
+          { nombre: "Semillas (opcional)", cantidad: "10g", calorias: 30, grasas: 3 }
+        ]
       },
       merienda: "merienda_yogur_fruta",
       cena: {
         ref: "omelette_espinaca_port",
         nota: "Espinaca congelada o acelga salteada; listo en 10 min.",
-        calorias: 340
+        calorias: 340,
+        ingredientes: [
+          { nombre: "Huevo", cantidad: "2 unidades", calorias: 140, proteinas: 12, grasas: 10 },
+          { nombre: "Espinaca cocida", cantidad: "100g", calorias: 30, carbohidratos: 4, proteinas: 3 },
+          { nombre: "Queso port salut", cantidad: "30g", calorias: 90, proteinas: 7, grasas: 5 },
+          { nombre: "Aceite", cantidad: "1 cdita (5g)", calorias: 45, grasas: 5 },
+          { nombre: "Ensalada verde", cantidad: "80g", calorias: 20, carbohidratos: 4 }
+        ]
       }
     },
     viernes: {
@@ -187,13 +231,29 @@ export const nutritionData: NutritionPlan = {
         ref: "carne_estofada_arroz",
         prep_batch_freezar: true,
         nota: "Usá corte económico (paleta, roast beef) a cocción lenta. Rinde varios días.",
-        calorias: 720
+        calorias: 720,
+        ingredientes: [
+          { nombre: "Carne vacuna", cantidad: "150g", calorias: 250, proteinas: 28, grasas: 14 },
+          { nombre: "Arroz blanco cocido", cantidad: "150g", calorias: 180, carbohidratos: 40 },
+          { nombre: "Brócoli cocido", cantidad: "100g", calorias: 30, carbohidratos: 6, proteinas: 3 },
+          { nombre: "Zanahoria", cantidad: "50g", calorias: 20, carbohidratos: 5 },
+          { nombre: "Aceite", cantidad: "1 cda (10g)", calorias: 90, grasas: 10 },
+          { nombre: "Salsa de tomate", cantidad: "50g", calorias: 20, carbohidratos: 4 }
+        ]
       },
       merienda: "merienda_tostada_queso",
       cena: {
         ref: "ensalada_atun_arroz",
         nota: "Usá arroz ya hecho (sobras del estofado) + atún lata.",
-        calorias: 320
+        calorias: 320,
+        ingredientes: [
+          { nombre: "Arroz blanco cocido", cantidad: "100g", calorias: 120, carbohidratos: 26 },
+          { nombre: "Atún al natural", cantidad: "1 lata (80g)", calorias: 90, proteinas: 18, grasas: 1 },
+          { nombre: "Lechuga", cantidad: "50g", calorias: 10, carbohidratos: 2 },
+          { nombre: "Zanahoria", cantidad: "30g", calorias: 12, carbohidratos: 3 },
+          { nombre: "Tomate", cantidad: "50g", calorias: 10, carbohidratos: 2 },
+          { nombre: "Aceite", cantidad: "1 cdita (5g)", calorias: 45, grasas: 5 }
+        ]
       }
     },
     sabado: {
@@ -201,13 +261,29 @@ export const nutritionData: NutritionPlan = {
       almuerzo: {
         ref: "pizza_espinaca_verd",
         nota: "Masa casera o prepizza barata. Cubrí con verduras asadas de estación.",
-        calorias: 680
+        calorias: 680,
+        ingredientes: [
+          { nombre: "Prepizza o masa casera", cantidad: "1 porción (120g)", calorias: 300, carbohidratos: 60, proteinas: 8 },
+          { nombre: "Queso port salut", cantidad: "50g", calorias: 150, proteinas: 12, grasas: 8 },
+          { nombre: "Espinaca/Morrón/Tomate asado", cantidad: "100g", calorias: 40, carbohidratos: 8 },
+          { nombre: "Aceite de oliva", cantidad: "1 cdita (5g)", calorias: 45, grasas: 5 },
+          { nombre: "Salsa de tomate", cantidad: "40g", calorias: 15, carbohidratos: 3 },
+          { nombre: "Orégano", cantidad: "1 pizca", calorias: 0 }
+        ]
       },
       merienda: "merienda_inf_pancake",
       cena: {
         ref: "wrap_zapallo_morron",
         nota: "Horneá zapallo y morrón junto con prepizza para ahorrar gas.",
-        calorias: 360
+        calorias: 360,
+        ingredientes: [
+          { nombre: "Tortilla de trigo integral", cantidad: "1 unidad (40g)", calorias: 110, carbohidratos: 22 },
+          { nombre: "Zapallo asado", cantidad: "100g", calorias: 40, carbohidratos: 10 },
+          { nombre: "Morrón asado", cantidad: "50g", calorias: 15, carbohidratos: 3 },
+          { nombre: "Pollo cocido (opcional)", cantidad: "50g", calorias: 60, proteinas: 10, grasas: 1 },
+          { nombre: "Hojas verdes", cantidad: "30g", calorias: 8, carbohidratos: 2 },
+          { nombre: "Aceite", cantidad: "1 cdita (5g)", calorias: 45, grasas: 5 }
+        ]
       }
     },
     domingo: {
@@ -216,13 +292,27 @@ export const nutritionData: NutritionPlan = {
         ref: "tarta_pollo",
         prep_batch_freezar: true,
         nota: "Hacé 2 tartas; usá sobras de pollo o muslo hervido. Congelá porciones.",
-        calorias: 540
+        calorias: 540,
+        ingredientes: [
+          { nombre: "Tapa de tarta", cantidad: "1 unidad", calorias: 200, carbohidratos: 35, proteinas: 5 },
+          { nombre: "Pollo cocido", cantidad: "80g", calorias: 100, proteinas: 18, grasas: 2 },
+          { nombre: "Verduras varias (acelga, zanahoria, cebolla)", cantidad: "100g", calorias: 40, carbohidratos: 8 },
+          { nombre: "Queso port salut", cantidad: "30g", calorias: 90, proteinas: 7, grasas: 5 },
+          { nombre: "Huevo", cantidad: "1 unidad", calorias: 70, proteinas: 6, grasas: 5 }
+        ]
       },
       merienda: "merienda_yogur_fruta",
       cena: {
         ref: "sandwich_pollo_port",
         nota: "Usá pollo cocido de la tarta; cena liviana. Prepará batch cocción para semana.",
-        calorias: 420
+        calorias: 420,
+        ingredientes: [
+          { nombre: "Pan integral", cantidad: "2 rebanadas (60g)", calorias: 160, carbohidratos: 30, proteinas: 6 },
+          { nombre: "Pollo cocido", cantidad: "60g", calorias: 75, proteinas: 13, grasas: 1 },
+          { nombre: "Queso port salut", cantidad: "20g", calorias: 60, proteinas: 5, grasas: 3 },
+          { nombre: "Tomate", cantidad: "40g", calorias: 8, carbohidratos: 2 },
+          { nombre: "Ensalada verde", cantidad: "60g", calorias: 15, carbohidratos: 3 }
+        ]
       }
     }
   },
