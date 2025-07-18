@@ -1,7 +1,8 @@
+import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Clock } from 'lucide-react'
+import { Clock, Timer as TimerIcon, X } from 'lucide-react'
 import { BlockType } from '@/domain/types/workout'
 import { ExerciseBlock } from './ExerciseBlock'
 import { WarmupSection } from './WarmupSection'
@@ -32,9 +33,58 @@ export const WorkoutTab = ({
     formatReps,
     getRirBadge,
 }: WorkoutTabProps) => {
+    // Timer state
+    const [showTimer, setShowTimer] = useState(false)
+    const [secondsLeft, setSecondsLeft] = useState(180)
+    const timerRef = useRef<NodeJS.Timeout | null>(null)
+
+    // Iniciar timer
+    const startTimer = () => {
+        setSecondsLeft(180)
+        setShowTimer(true)
+    }
+
+    // Lógica de cuenta regresiva
+    useEffect(() => {
+        if (!showTimer) return
+        if (secondsLeft === 0) {
+            setShowTimer(false)
+            return
+        }
+        timerRef.current = setTimeout(() => {
+            setSecondsLeft((s) => s - 1)
+        }, 1000)
+        return () => clearTimeout(timerRef.current as any)
+    }, [showTimer, secondsLeft])
+
+    // Cancelar timer
+    const cancelTimer = () => {
+        setShowTimer(false)
+        setSecondsLeft(180)
+        if (timerRef.current) clearTimeout(timerRef.current)
+    }
+
+    // Formatear tiempo mm:ss
+    const formatTime = (s: number) => {
+        const m = Math.floor(s / 60)
+        const ss = s % 60
+        return `${m}:${ss.toString().padStart(2, '0')}`
+    }
+
     return (
-        <div className="mb-6">
+        <div className="mb-6 relative">
             <h2 className="text-xl font-semibold text-center mb-4">{currentDay.day_name}</h2>
+
+            {/* Botón circular de timer */}
+            <div className="flex justify-center mb-4">
+                <button
+                    onClick={startTimer}
+                    className="rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg w-12 h-12 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
+                    title="Iniciar timer de pausa"
+                >
+                    <TimerIcon className="w-6 h-6 text-white" />
+                </button>
+            </div>
 
             {/* Warmup Toggle */}
             <Button
@@ -78,6 +128,22 @@ export const WorkoutTab = ({
                     </div>
                 </CardContent>
             </Card>
+
+            {/* Overlay Timer */}
+            {showTimer && (
+                <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-80 transition-opacity animate-fade-in">
+                    <div className="text-6xl font-bold text-white mb-6 drop-shadow-lg">
+                        {formatTime(secondsLeft)}
+                    </div>
+                    <button
+                        onClick={cancelTimer}
+                        className="mt-4 p-3 rounded-full bg-gray-700 hover:bg-red-600 text-white transition-colors"
+                        title="Cancelar pausa"
+                    >
+                        <X className="w-7 h-7" />
+                    </button>
+                </div>
+            )}
         </div>
     )
 } 
