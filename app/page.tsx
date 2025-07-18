@@ -60,7 +60,7 @@ export default function BJJGymRoutine() {
       <div className="container mx-auto px-4 py-6 max-w-md">
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-white mb-2">BJJ Training</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">Opti</h1>
         </div>
 
         {/* Day Navigation */}
