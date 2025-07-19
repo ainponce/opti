@@ -15,33 +15,32 @@ export const DayNavigation = ({ days, selectedDay, onSelectDay }: DayNavigationP
     useEffect(() => {
         const today = new Date()
         const dayOfWeek = today.getDay() // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
-        
+
         // Convertir a nuestro formato (0 = Lunes, 1 = Martes, ..., 6 = Domingo)
         let todayIndex = dayOfWeek - 1
         if (todayIndex === -1) todayIndex = 6 // Domingo
-        
+
         setCurrentDayIndex(todayIndex)
     }, [])
 
     return (
-        <div className="grid grid-cols-5 gap-2 mb-6">
+        <div className="grid grid-cols-7 gap-1 mb-6">
             {days.map((day, index) => {
                 const isSelected = selectedDay === index
                 const isToday = currentDayIndex === index
-                
+
                 return (
                     <Button
                         key={index}
                         variant={isSelected ? "default" : "outline"}
                         size="sm"
                         onClick={() => onSelectDay(index)}
-                        className={`text-xs relative ${
-                            isSelected
-                                ? "bg-blue-600 hover:bg-blue-700"
-                                : isToday
+                        className={`text-[10px] relative ${isSelected
+                            ? "bg-blue-600 hover:bg-blue-700"
+                            : isToday
                                 ? "bg-green-600 hover:bg-green-700 border-green-500"
                                 : "bg-gray-800 border-gray-700 hover:bg-gray-700"
-                        }`}
+                            }`}
                     >
                         {day.day_name.slice(0, 3)}
                         {isToday && !isSelected && (

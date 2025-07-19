@@ -73,31 +73,49 @@ export const WorkoutTab = ({
 
     return (
         <div className="mb-6 relative">
+            {/* Mensaje para días sin ejercicios - Antes del título */}
+            {Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
+                <Card className="bg-gray-900 border-gray-800 mb-4">
+                    <CardContent className="pt-4 pb-3">
+                        <div className="text-center text-gray-400">
+                            <p className="text-sm">Día de descanso - No hay ejercicios programados</p>
+                            <p className="text-xs mt-1">¡Disfruta tu día libre!</p>
+                        </div>
+                    </CardContent>
+                </Card>
+            )}
+
             <h2 className="text-xl font-semibold text-center mb-4">{currentDay.day_name}</h2>
 
-            {/* Botón circular de timer */}
-            <div className="flex justify-center mb-4">
-                <button
-                    onClick={startTimer}
-                    className="rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg w-12 h-12 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
-                    title="Iniciar timer de pausa"
-                >
-                    <TimerIcon className="w-6 h-6 text-white" />
-                </button>
-            </div>
+            {/* Botón circular de timer - Solo mostrar si hay ejercicios */}
+            {!Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
+                <div className="flex justify-center mb-4">
+                    <button
+                        onClick={startTimer}
+                        className="rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg w-12 h-12 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
+                        title="Iniciar timer de pausa"
+                    >
+                        <TimerIcon className="w-6 h-6 text-white" />
+                    </button>
+                </div>
+            )}
 
-            {/* Warmup Toggle */}
-            <Button
-                variant="outline"
-                onClick={onToggleWarmup}
-                className="w-full mb-4 bg-gray-800 border-gray-700 hover:bg-gray-700"
-            >
-                <Clock className="w-4 h-4 mr-2" />
-                {showWarmup ? "Ocultar" : "Mostrar"} Calentamiento
-            </Button>
+            {/* Warmup Toggle - Solo mostrar si hay ejercicios */}
+            {!Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
+                <>
+                    <Button
+                        variant="outline"
+                        onClick={onToggleWarmup}
+                        className="w-full mb-4 bg-gray-800 border-gray-700 hover:bg-gray-700"
+                    >
+                        <Clock className="w-4 h-4 mr-2" />
+                        {showWarmup ? "Ocultar" : "Mostrar"} Calentamiento
+                    </Button>
 
-            {/* Warmup Section */}
-            {showWarmup && <WarmupSection warmup={globalWarmup} />}
+                    {/* Warmup Section */}
+                    {showWarmup && <WarmupSection warmup={globalWarmup} />}
+                </>
+            )}
 
             {/* Exercise Blocks */}
             <div className="space-y-4">
@@ -114,20 +132,22 @@ export const WorkoutTab = ({
                 ))}
             </div>
 
-            {/* Guidelines */}
-            <Card className="mt-6 bg-gray-900 border-gray-800">
-                <CardHeader className="pb-3">
-                    <CardTitle className="text-sm">Pautas de Intensidad</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                    <div className="text-xs text-gray-400">
-                        <strong>Pausas:</strong> {intensityGuidelines.pausas}
-                    </div>
-                    <div className="text-xs text-gray-400">
-                        <strong>RIR:</strong> {units.rir_definition}
-                    </div>
-                </CardContent>
-            </Card>
+            {/* Guidelines - Solo mostrar si hay ejercicios */}
+            {!Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
+                <Card className="mt-6 bg-gray-900 border-gray-800">
+                    <CardHeader className="pb-3">
+                        <CardTitle className="text-sm">Pautas de Intensidad</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                        <div className="text-xs text-gray-400">
+                            <strong>Pausas:</strong> {intensityGuidelines.pausas}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                            <strong>RIR:</strong> {units.rir_definition}
+                        </div>
+                    </CardContent>
+                </Card>
+            )}
 
             {/* Overlay Timer */}
             {showTimer && (

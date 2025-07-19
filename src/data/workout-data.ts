@@ -18,7 +18,7 @@ export const workoutData: WorkoutRoutine = {
       { exercise: "Puentes", prescription: "15/lado" },
       { exercise: "Flexiones", reps: 5 },
       { exercise: "Sentadillas", reps: 5 },
-      { exercise: "1er ejercicio de la rutina", reps: "6-8 (ligero, activación)" },
+      { exercise: "1er ejercicio de la rutina", prescription: "6-8 (ligero, activación)" },
     ],
   },
   intensity_guidelines: {
@@ -111,6 +111,26 @@ export const workoutData: WorkoutRoutine = {
               { name: "Farmers en rack", sets: 4, duration: "20sec" },
             ],
             F: [{ name: "Remo en polea", reps_scheme: [12, 10, 8, 6] }],
+          },
+        },
+        {
+          day_name: "Sábado",
+          day_code: "DIA6",
+          warmup: "global_warmup",
+          blocks: {
+            P: [],
+            A: [],
+            F: [],
+          },
+        },
+        {
+          day_name: "Domingo",
+          day_code: "DIA7",
+          warmup: "global_warmup",
+          blocks: {
+            P: [],
+            A: [],
+            F: [],
           },
         },
       ],

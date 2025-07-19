@@ -31,7 +31,7 @@ export default function BJJGymRoutine() {
     workoutService,
   } = useWorkout()
 
-  const { nutritionService, currentNutritionDay } = useNutrition(currentDay.day_name)
+  const { nutritionService, currentNutritionDay } = useNutrition(currentDay?.day_name || 'Lunes')
 
   // Funciones utilitarias - Single Responsibility Principle
   const getRirBadge = (blockType: BlockType) => {
@@ -77,31 +77,37 @@ export default function BJJGymRoutine() {
         />
 
         {/* Content based on active tab */}
-        {activeTab === "workout" ? (
-          <WorkoutTab
-            currentDay={currentDay}
-            showWarmup={showWarmup}
-            completedExercises={completedExercises}
-            globalWarmup={globalWarmup}
-            intensityGuidelines={intensityGuidelines}
-            units={units}
-            onToggleWarmup={toggleWarmup}
-            onToggleExercise={toggleExercise}
-            formatReps={workoutService.formatExerciseReps.bind(workoutService)}
-            getRirBadge={getRirBadge}
-          />
+        {currentDay ? (
+          activeTab === "workout" ? (
+            <WorkoutTab
+              currentDay={currentDay}
+              showWarmup={showWarmup}
+              completedExercises={completedExercises}
+              globalWarmup={globalWarmup}
+              intensityGuidelines={intensityGuidelines}
+              units={units}
+              onToggleWarmup={toggleWarmup}
+              onToggleExercise={toggleExercise}
+              formatReps={workoutService.formatExerciseReps.bind(workoutService)}
+              getRirBadge={getRirBadge}
+            />
+          ) : (
+            <NutritionTab
+              currentDay={currentDay}
+              currentNutritionDay={currentNutritionDay}
+              shoppingList={nutritionData.listas_compras_basicas}
+              getMealLabel={nutritionService.getMealLabel.bind(nutritionService)}
+              getSaciedadBadge={getSaciedadBadge}
+              findMealOption={nutritionService.findMealOptionById.bind(nutritionService)}
+              getMealCalories={nutritionService.getMealCalories.bind(nutritionService)}
+              getMealIngredients={nutritionService.getMealIngredients.bind(nutritionService)}
+              getPrepTips={nutritionService.getPrepTips.bind(nutritionService)}
+            />
+          )
         ) : (
-          <NutritionTab
-            currentDay={currentDay}
-            currentNutritionDay={currentNutritionDay}
-            shoppingList={nutritionData.listas_compras_basicas}
-            getMealLabel={nutritionService.getMealLabel.bind(nutritionService)}
-            getSaciedadBadge={getSaciedadBadge}
-            findMealOption={nutritionService.findMealOptionById.bind(nutritionService)}
-            getMealCalories={nutritionService.getMealCalories.bind(nutritionService)}
-            getMealIngredients={nutritionService.getMealIngredients.bind(nutritionService)}
-            getPrepTips={nutritionService.getPrepTips.bind(nutritionService)}
-          />
+          <div className="text-center text-gray-400 mt-8">
+            <p>No se encontró información para el día seleccionado.</p>
+          </div>
         )}
       </div>
     </div>

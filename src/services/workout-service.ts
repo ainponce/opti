@@ -22,12 +22,19 @@ export class WorkoutService {
   }
 
   getRirValue(blockType: BlockType): string | number | null {
-    const rir = this.routine.intensity_guidelines.rir[blockType]
+    // Mapear F a F1 para compatibilidad con los datos
+    const rirKey = blockType === 'F' ? 'F1' : blockType
+    const rir = this.routine.intensity_guidelines.rir[rirKey as keyof typeof this.routine.intensity_guidelines.rir]
     return rir || null
   }
 
   getCurrentDay(selectedDay: number) {
-    return this.routine.weeks[0].days[selectedDay]
+    const days = this.routine.weeks[0].days
+    if (selectedDay >= 0 && selectedDay < days.length) {
+      return days[selectedDay]
+    }
+    // Si el índice está fuera de rango, retornar el primer día como fallback
+    return days[0] || null
   }
 
   getGlobalWarmup() {

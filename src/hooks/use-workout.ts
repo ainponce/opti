@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import { WorkoutService } from '@/services/workout-service'
 import { workoutData } from '@/data/workout-data'
 
@@ -8,7 +8,8 @@ export const useWorkout = () => {
   const [showWarmup, setShowWarmup] = useState(false)
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
 
-  const workoutService = new WorkoutService(workoutData)
+  // Crear el servicio una sola vez para evitar recreaciones
+  const workoutService = useMemo(() => new WorkoutService(workoutData), [])
 
   // Detectar el día actual automáticamente al cargar la app
   useEffect(() => {
@@ -19,8 +20,14 @@ export const useWorkout = () => {
     let currentDayIndex = dayOfWeek - 1
     if (currentDayIndex === -1) currentDayIndex = 6 // Domingo
     
+    // Asegurar que el índice esté dentro del rango válido (0-6)
+    const maxDays = workoutService.getAllDays().length - 1
+    if (currentDayIndex > maxDays) {
+      currentDayIndex = 0 // Fallback al primer día si el índice es muy alto
+    }
+    
     setSelectedDay(currentDayIndex)
-  }, [])
+  }, [workoutService])
 
   const toggleExercise = useCallback((exerciseId: string) => {
     setCompletedExercises(prev => {
