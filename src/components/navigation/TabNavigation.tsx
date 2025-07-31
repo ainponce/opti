@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Dumbbell, Utensils, GraduationCap } from 'lucide-react'
+import { Dumbbell, Utensils, Shirt } from 'lucide-react'
 
 type TabType = "bjj" | "workout" | "nutrition"
 
@@ -20,7 +20,7 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
                     : "bg-gray-800 border-gray-700 hover:bg-gray-700"
                     }`}
             >
-                <GraduationCap className="w-4 h-4 mr-2" />
+                <Shirt className="w-4 h-4 mr-2" />
                 BJJ
             </Button>
             <Button

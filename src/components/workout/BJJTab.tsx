@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { GraduationCap, Save } from 'lucide-react'
+import { Shirt, Save } from 'lucide-react'
 
 interface BJJTabProps {
     currentDay: any
@@ -26,7 +26,7 @@ export const BJJTab = ({ currentDay }: BJJTabProps) => {
             <Card className="bg-gray-900 border-gray-800">
                 <CardHeader className="pb-3">
                     <CardTitle className="text-lg flex items-center gap-2">
-                        <GraduationCap className="w-4 h-4" />
+                        <Shirt className="w-4 h-4" />
                         Entrenamiento BJJ
                     </CardTitle>
                 </CardHeader>
