@@ -50,22 +50,28 @@ export const ExerciseBlock = ({
                 </div>
             </CardHeader>
             <CardContent className="space-y-3">
-                {exercises.map((exercise, index) => {
-                    const exerciseId = `${blockType}-${index}`
-                    const isCompleted = completedExercises.has(exerciseId)
+                {exercises.length > 0 ? (
+                    exercises.map((exercise, index) => {
+                        const exerciseId = `${blockType}-${index}`
+                        const isCompleted = completedExercises.has(exerciseId)
 
-                    return (
-                        <ExerciseCard
-                            key={index}
-                            exercise={exercise}
-                            blockType={blockType}
-                            exerciseIndex={index}
-                            isCompleted={isCompleted}
-                            onToggle={onToggleExercise}
-                            formatReps={formatReps}
-                        />
-                    )
-                })}
+                        return (
+                            <ExerciseCard
+                                key={index}
+                                exercise={exercise}
+                                blockType={blockType}
+                                exerciseIndex={index}
+                                isCompleted={isCompleted}
+                                onToggle={onToggleExercise}
+                                formatReps={formatReps}
+                            />
+                        )
+                    })
+                ) : (
+                    <div className="text-center py-4 text-gray-500">
+                        No hay ejercicios programados
+                    </div>
+                )}
             </CardContent>
         </Card>
     )

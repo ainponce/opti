@@ -7,13 +7,14 @@ import { useNutrition } from "@/hooks/use-nutrition"
 import { DayNavigation } from "@/components/navigation/DayNavigation"
 import { TabNavigation } from "@/components/navigation/TabNavigation"
 import { WorkoutTab } from "@/components/workout/WorkoutTab"
+import { BJJTab } from "@/components/workout/BJJTab"
 import { NutritionTab } from "@/components/nutrition/NutritionTab"
 import { BlockType } from "@/domain/types/workout"
 import { nutritionData } from "@/data/nutrition-data"
 
 // Componente principal - Single Responsibility Principle
 export default function BJJGymRoutine() {
-  const [activeTab, setActiveTab] = useState<"workout" | "nutrition">("workout")
+  const [activeTab, setActiveTab] = useState<"bjj" | "workout" | "nutrition">("bjj")
 
   // Hooks personalizados - Dependency Inversion Principle
   const {
@@ -78,7 +79,9 @@ export default function BJJGymRoutine() {
 
         {/* Content based on active tab */}
         {currentDay ? (
-          activeTab === "workout" ? (
+          activeTab === "bjj" ? (
+            <BJJTab currentDay={currentDay} />
+          ) : activeTab === "workout" ? (
             <WorkoutTab
               currentDay={currentDay}
               showWarmup={showWarmup}

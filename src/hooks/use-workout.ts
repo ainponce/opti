@@ -6,7 +6,7 @@ import { workoutData } from '@/data/workout-data'
 export const useWorkout = () => {
   const [selectedDay, setSelectedDay] = useState(0)
   const [showWarmup, setShowWarmup] = useState(false)
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
+  const [completedExercisesByDay, setCompletedExercisesByDay] = useState<Record<number, Set<string>>>({})
 
   // Crear el servicio una sola vez para evitar recreaciones
   const workoutService = useMemo(() => new WorkoutService(workoutData), [])
@@ -30,16 +30,20 @@ export const useWorkout = () => {
   }, [workoutService])
 
   const toggleExercise = useCallback((exerciseId: string) => {
-    setCompletedExercises(prev => {
-      const newCompleted = new Set(prev)
-      if (newCompleted.has(exerciseId)) {
-        newCompleted.delete(exerciseId)
+    setCompletedExercisesByDay(prev => {
+      const newState = { ...prev }
+      const currentDayExercises = new Set(newState[selectedDay] || [])
+      
+      if (currentDayExercises.has(exerciseId)) {
+        currentDayExercises.delete(exerciseId)
       } else {
-        newCompleted.add(exerciseId)
+        currentDayExercises.add(exerciseId)
       }
-      return newCompleted
+      
+      newState[selectedDay] = currentDayExercises
+      return newState
     })
-  }, [])
+  }, [selectedDay])
 
   const toggleWarmup = useCallback(() => {
     setShowWarmup(prev => !prev)
@@ -48,6 +52,9 @@ export const useWorkout = () => {
   const selectDay = useCallback((dayIndex: number) => {
     setSelectedDay(dayIndex)
   }, [])
+
+  // Obtener ejercicios completados del día actual
+  const completedExercises = completedExercisesByDay[selectedDay] || new Set()
 
   const currentDay = workoutService.getCurrentDay(selectedDay)
   const globalWarmup = workoutService.getGlobalWarmup()

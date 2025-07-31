@@ -73,36 +73,35 @@ export const WorkoutTab = ({
 
     return (
         <div className="mb-6 relative">
-            {/* Mensaje para días sin ejercicios - Antes del título */}
-            {Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
-                <Card className="bg-gray-900 border-gray-800 mb-4">
-                    <CardContent className="pt-4 pb-3">
+            {/* Verificar si es día de descanso */}
+            {Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) ? (
+                // Día de descanso - Solo mostrar mensaje
+                <Card className="bg-gray-900 border-gray-800">
+                    <CardContent className="pt-6 pb-6">
                         <div className="text-center text-gray-400">
-                            <p className="text-sm">Día de descanso - No hay ejercicios programados</p>
-                            <p className="text-xs mt-1">¡Disfruta tu día libre!</p>
+                            <p className="text-lg font-medium mb-2">Día de descanso</p>
+                            <p className="text-sm">No hay ejercicios programados</p>
+                            <p className="text-xs mt-2">¡Disfruta tu día libre!</p>
                         </div>
                     </CardContent>
                 </Card>
-            )}
-
-            <h2 className="text-xl font-semibold text-center mb-4">{currentDay.day_name}</h2>
-
-            {/* Botón circular de timer - Solo mostrar si hay ejercicios */}
-            {!Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
-                <div className="flex justify-center mb-4">
-                    <button
-                        onClick={startTimer}
-                        className="rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg w-12 h-12 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
-                        title="Iniciar timer de pausa"
-                    >
-                        <TimerIcon className="w-6 h-6 text-white" />
-                    </button>
-                </div>
-            )}
-
-            {/* Warmup Toggle - Solo mostrar si hay ejercicios */}
-            {!Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
+            ) : (
+                // Día con ejercicios - Mostrar todo el contenido
                 <>
+                    <h2 className="text-xl font-semibold text-center mb-4">{currentDay.day_name}</h2>
+
+                    {/* Botón circular de timer */}
+                    <div className="flex justify-center mb-4">
+                        <button
+                            onClick={startTimer}
+                            className="rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg w-12 h-12 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
+                            title="Iniciar timer de pausa"
+                        >
+                            <TimerIcon className="w-6 h-6 text-white" />
+                        </button>
+                    </div>
+
+                    {/* Warmup Toggle */}
                     <Button
                         variant="outline"
                         onClick={onToggleWarmup}
@@ -114,39 +113,45 @@ export const WorkoutTab = ({
 
                     {/* Warmup Section */}
                     {showWarmup && <WarmupSection warmup={globalWarmup} />}
+
+                    {/* Exercise Blocks */}
+                    <div className="space-y-4">
+                        {Object.entries(currentDay.blocks)
+                            .sort(([a], [b]) => {
+                                // Ordenar bloques: Principal (P) primero, luego Auxiliar (A), finalmente Finalizador (F)
+                                const order = { P: 1, A: 2, F: 3 }
+                                const orderA = order[a as keyof typeof order] || 999
+                                const orderB = order[b as keyof typeof order] || 999
+                                return orderA - orderB
+                            })
+                            .map(([blockType, exercises]) => (
+                                <ExerciseBlock
+                                    key={blockType}
+                                    blockType={blockType as BlockType}
+                                    exercises={exercises as any[]}
+                                    completedExercises={completedExercises}
+                                    onToggleExercise={onToggleExercise}
+                                    formatReps={formatReps}
+                                    getRirBadge={getRirBadge}
+                                />
+                            ))}
+                    </div>
+
+                    {/* Guidelines */}
+                    <Card className="mt-6 bg-gray-900 border-gray-800">
+                        <CardHeader className="pb-3">
+                            <CardTitle className="text-sm">Pautas de Intensidad</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="text-xs text-gray-400">
+                                <strong>Pausas:</strong> {intensityGuidelines.pausas}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                                <strong>RIR:</strong> {units.rir_definition}
+                            </div>
+                        </CardContent>
+                    </Card>
                 </>
-            )}
-
-            {/* Exercise Blocks */}
-            <div className="space-y-4">
-                {Object.entries(currentDay.blocks).map(([blockType, exercises]) => (
-                    <ExerciseBlock
-                        key={blockType}
-                        blockType={blockType as BlockType}
-                        exercises={exercises as any[]}
-                        completedExercises={completedExercises}
-                        onToggleExercise={onToggleExercise}
-                        formatReps={formatReps}
-                        getRirBadge={getRirBadge}
-                    />
-                ))}
-            </div>
-
-            {/* Guidelines - Solo mostrar si hay ejercicios */}
-            {!Object.values(currentDay.blocks).every((exercises: any) => exercises.length === 0) && (
-                <Card className="mt-6 bg-gray-900 border-gray-800">
-                    <CardHeader className="pb-3">
-                        <CardTitle className="text-sm">Pautas de Intensidad</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <div className="text-xs text-gray-400">
-                            <strong>Pausas:</strong> {intensityGuidelines.pausas}
-                        </div>
-                        <div className="text-xs text-gray-400">
-                            <strong>RIR:</strong> {units.rir_definition}
-                        </div>
-                    </CardContent>
-                </Card>
             )}
 
             {/* Overlay Timer */}
