@@ -59,9 +59,9 @@ function BJJGymRoutine() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
+    <div className="min-h-screen-safe bg-gray-950 text-gray-100">
       <Header />
-      <div className="container mx-auto px-4 py-6 max-w-md">
+      <div className="container mx-auto px-4 py-6 max-w-md pb-safe">
         {/* Day Navigation */}
         <DayNavigation
           days={allDays}

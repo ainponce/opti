@@ -11,25 +11,25 @@ export const Header = () => {
   }
 
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-900 border-b border-gray-800">
-      <div className="flex items-center gap-3">
+    <div className="flex items-center justify-between p-4 pt-safe bg-gray-900 border-b border-gray-800">
+      <div className="flex items-center gap-3 min-w-0 flex-1">
         <Logo size="sm" />
         {user && (
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <User className="w-4 h-4" />
-            <span>{user.email}</span>
+          <div className="flex items-center gap-2 text-sm text-gray-400 min-w-0 flex-1">
+            <User className="w-4 h-4 flex-shrink-0" />
+            <span className="truncate">{user.email}</span>
           </div>
         )}
       </div>
-      
+
       {user && (
         <Button
           onClick={handleSignOut}
           variant="outline"
           size="sm"
-          className="bg-gray-800 border-gray-700 hover:bg-gray-700 text-gray-300"
+          className="bg-gray-800 border-gray-700 hover:bg-gray-700 text-gray-300 flex-shrink-0 ml-2"
         >
-          <LogOut className="w-4 h-4 mr-2" />
+          <LogOut className="w-4 h-4" />
         </Button>
       )}
     </div>
