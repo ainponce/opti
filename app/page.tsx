@@ -9,11 +9,13 @@ import { TabNavigation } from "@/components/navigation/TabNavigation"
 import { WorkoutTab } from "@/components/workout/WorkoutTab"
 import { BJJTab } from "@/components/workout/BJJTab"
 import { NutritionTab } from "@/components/nutrition/NutritionTab"
+import { AuthGuard } from "@/components/auth/AuthGuard"
+import { Header } from "@/components/auth/Header"
 import { BlockType } from "@/domain/types/workout"
 import { nutritionData } from "@/data/nutrition-data"
 
 // Componente principal - Single Responsibility Principle
-export default function BJJGymRoutine() {
+function BJJGymRoutine() {
   const [activeTab, setActiveTab] = useState<"bjj" | "workout" | "nutrition">("bjj")
 
   // Hooks personalizados - Dependency Inversion Principle
@@ -58,12 +60,8 @@ export default function BJJGymRoutine() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
+      <Header />
       <div className="container mx-auto px-4 py-6 max-w-md">
-        {/* Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-white mb-2">Opti</h1>
-        </div>
-
         {/* Day Navigation */}
         <DayNavigation
           days={allDays}
@@ -114,5 +112,14 @@ export default function BJJGymRoutine() {
         )}
       </div>
     </div>
+  )
+}
+
+// Componente principal con protección de autenticación
+export default function App() {
+  return (
+    <AuthGuard>
+      <BJJGymRoutine />
+    </AuthGuard>
   )
 }
