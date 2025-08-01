@@ -1,20 +1,38 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback, memo } from "react"
 import { Badge } from "@/components/ui/badge"
 import { useWorkout } from "@/hooks/use-workout"
 import { useNutrition } from "@/hooks/use-nutrition"
 import { DayNavigation } from "@/components/navigation/DayNavigation"
 import { TabNavigation } from "@/components/navigation/TabNavigation"
-import { WorkoutTab } from "@/components/workout/WorkoutTab"
-import { BJJTab } from "@/components/workout/BJJTab"
-import { BJJHistory } from "@/components/workout/BJJHistory"
-import { NutritionTab } from "@/components/nutrition/NutritionTab"
-import { ProfileTab } from "@/components/profile/ProfileTab"
+import dynamic from "next/dynamic"
+
+// Code splitting - lazy load heavy components
+const WorkoutTab = dynamic(() => import("@/components/workout/WorkoutTab").then(mod => ({ default: mod.WorkoutTab })), {
+  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
+})
+
+const BJJTab = dynamic(() => import("@/components/workout/BJJTab").then(mod => ({ default: mod.BJJTab })), {
+  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
+})
+
+const BJJHistory = dynamic(() => import("@/components/workout/BJJHistory").then(mod => ({ default: mod.BJJHistory })), {
+  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
+})
+
+const NutritionTab = dynamic(() => import("@/components/nutrition/NutritionTab").then(mod => ({ default: mod.NutritionTab })), {
+  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
+})
+
+const ProfileTab = dynamic(() => import("@/components/profile/ProfileTab").then(mod => ({ default: mod.ProfileTab })), {
+  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
+})
 
 import { AuthGuard } from "@/components/auth/AuthGuard"
 import { Header } from "@/components/auth/Header"
 import { ToastContainer } from "@/components/ui/toast"
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary"
 import { BlockType } from "@/domain/types/workout"
 import { nutritionData } from "@/data/nutrition-data"
 
@@ -42,8 +60,8 @@ function BJJGymRoutine() {
 
   const { nutritionService, currentNutritionDay } = useNutrition(currentDay?.day_name || 'Lunes')
 
-  // Funciones utilitarias - Single Responsibility Principle
-  const getRirBadge = (blockType: BlockType) => {
+  // Memoized utility functions to prevent re-renders
+  const getRirBadge = useCallback((blockType: BlockType) => {
     const rir = workoutService.getRirValue(blockType)
     if (!rir) return null
 
@@ -52,9 +70,9 @@ function BJJGymRoutine() {
         RIR: {rir}
       </Badge>
     )
-  }
+  }, [workoutService])
 
-  const getSaciedadBadge = (saciedad: string) => {
+  const getSaciedadBadge = useCallback((saciedad: string) => {
     if (!saciedad) return null
     const colorClass = nutritionService.getSaciedadBadgeColor(saciedad as any)
     return (
@@ -62,30 +80,32 @@ function BJJGymRoutine() {
         {saciedad} saciedad
       </Badge>
     )
-  }
+  }, [nutritionService])
 
-  const handleOpenBJJHistory = () => {
-    setShowProfile(false) // Cerrar perfil si está abierto
-    setShowBJJHistory(true)
-  }
-
-  const handleCloseBJJHistory = () => {
-    setShowBJJHistory(false)
-  }
-
-  const handleOpenProfile = () => {
-    setShowBJJHistory(false) // Cerrar historial de BJJ si está abierto
-    setShowProfile(true)
-  }
-
-  const handleCloseProfile = () => {
+  // Memoized handlers to prevent unnecessary re-renders
+  const handleOpenBJJHistory = useCallback(() => {
     setShowProfile(false)
-  }
+    setShowBJJHistory(true)
+  }, [])
+
+  const handleCloseBJJHistory = useCallback(() => {
+    setShowBJJHistory(false)
+  }, [])
+
+  const handleOpenProfile = useCallback(() => {
+    setShowBJJHistory(false)
+    setShowProfile(true)
+  }, [])
+
+  const handleCloseProfile = useCallback(() => {
+    setShowProfile(false)
+  }, [])
 
   return (
-    <div className="min-h-screen-safe bg-gray-950 text-gray-100">
-      <Header onOpenBJJHistory={handleOpenBJJHistory} onOpenProfile={handleOpenProfile} />
-      <div className="container mx-auto px-4 py-6 max-w-md pb-safe">
+    <ErrorBoundary>
+      <div className="min-h-screen-safe bg-gray-950 text-gray-100">
+        <Header onOpenBJJHistory={handleOpenBJJHistory} onOpenProfile={handleOpenProfile} />
+        <div className="container mx-auto px-4 py-6 max-w-md pb-safe">
         {showBJJHistory ? (
           <BJJHistory onBack={handleCloseBJJHistory} />
         ) : showProfile ? (
@@ -142,17 +162,21 @@ function BJJGymRoutine() {
             )}
           </>
         )}
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </div>
+    </ErrorBoundary>
   )
 }
+
+// Memoized main component to prevent unnecessary re-renders
+const MemoizedBJJGymRoutine = memo(BJJGymRoutine)
 
 // Componente principal con protección de autenticación
 export default function App() {
   return (
     <AuthGuard>
-      <BJJGymRoutine />
+      <MemoizedBJJGymRoutine />
     </AuthGuard>
   )
 }

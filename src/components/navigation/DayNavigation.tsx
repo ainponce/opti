@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 
 interface DayNavigationProps {
     days: any[]
@@ -8,7 +8,7 @@ interface DayNavigationProps {
 }
 
 // Componente de navegación de días - Single Responsibility Principle
-export const DayNavigation = ({ days, selectedDay, onSelectDay }: DayNavigationProps) => {
+const DayNavigationComponent = ({ days, selectedDay, onSelectDay }: DayNavigationProps) => {
     const [currentDayIndex, setCurrentDayIndex] = useState<number | null>(null)
 
     // Detectar el día actual
@@ -51,4 +51,6 @@ export const DayNavigation = ({ days, selectedDay, onSelectDay }: DayNavigationP
             })}
         </div>
     )
-} 
+}
+
+export const DayNavigation = memo(DayNavigationComponent) 

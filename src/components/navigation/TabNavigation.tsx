@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { memo } from 'react'
 
 type TabType = "bjj" | "workout" | "nutrition"
 
@@ -8,7 +9,7 @@ interface TabNavigationProps {
 }
 
 // Componente de navegación de pestañas - Single Responsibility Principle
-export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
+const TabNavigationComponent = ({ activeTab, onTabChange }: TabNavigationProps) => {
     return (
         <div className="grid grid-cols-3 gap-2 mb-4">
             <Button
@@ -46,4 +47,6 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
             </Button>
         </div>
     )
-} 
+}
+
+export const TabNavigation = memo(TabNavigationComponent) 

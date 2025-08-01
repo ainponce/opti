@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import { User } from 'lucide-react'
 import { useAuth } from '@/hooks/use-auth'
 import { useUserProfile } from '@/hooks/use-user-profile'

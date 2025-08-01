@@ -1,13 +1,16 @@
 {
-    "name": "BGN",
+    "name": "BGN - BJJ & Gym Nutrition",
     "short_name": "BGN",
-    "description": "BGN Application",
+    "description": "Complete fitness and nutrition tracking app for BJJ and gym training",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000",
+    "background_color": "#030712",
+    "theme_color": "#7c3aed",
     "orientation": "portrait",
     "scope": "/",
+    "categories": ["fitness", "health", "sports"],
+    "lang": "es",
+    "prefer_related_applications": false,
     "icons": [
         {
             "src": "/icon.png",
@@ -20,6 +23,29 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "BJJ Training",
+            "short_name": "BJJ",
+            "description": "Access BJJ training routines",
+            "url": "/?tab=bjj",
+            "icons": [{ "src": "/icon.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Gym Workout",
+            "short_name": "Gym",
+            "description": "Access gym workout routines",
+            "url": "/?tab=workout",
+            "icons": [{ "src": "/icon.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Nutrition",
+            "short_name": "Nutrition",
+            "description": "Track nutrition and meals",
+            "url": "/?tab=nutrition",
+            "icons": [{ "src": "/icon.png", "sizes": "192x192" }]
         }
     ]
 }

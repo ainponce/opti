@@ -11,7 +11,7 @@ export const useAuth = () => {
     // Si no hay cliente de Supabase, no hacer nada
     if (!supabase) {
       setLoading(false)
-      return
+      return () => {}
     }
 
     // Obtener sesión inicial

@@ -13,7 +13,7 @@ interface ProfileTabProps {
 export const ProfileTab = ({ onBack }: ProfileTabProps) => {
     const { user, signOut } = useAuth()
     const { profile, loading, updateDisplayName } = useUserProfile()
-    const { toast } = useToast()
+    const { showError, showSuccess } = useToast()
     const [isDeleting, setIsDeleting] = useState(false)
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
@@ -25,18 +25,10 @@ export const ProfileTab = ({ onBack }: ProfileTabProps) => {
             // Here you would implement the actual account deletion logic
             // For now, we'll just sign out the user
             await signOut()
-            toast({
-                title: 'Cuenta eliminada',
-                description: 'Tu cuenta ha sido eliminada exitosamente',
-                variant: 'default',
-            })
+            showSuccess('Tu cuenta ha sido eliminada exitosamente')
         } catch (error) {
             console.error('Error al eliminar cuenta:', error)
-            toast({
-                title: 'Error',
-                description: 'No se pudo eliminar la cuenta. Inténtalo de nuevo.',
-                variant: 'destructive',
-            })
+            showError('No se pudo eliminar la cuenta. Inténtalo de nuevo.')
         } finally {
             setIsDeleting(false)
             setShowDeleteConfirm(false)
