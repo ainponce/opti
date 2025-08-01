@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { Shirt, Save } from 'lucide-react'
 
 interface BJJTabProps {
     currentDay: any
@@ -22,11 +21,11 @@ export const BJJTab = ({ currentDay }: BJJTabProps) => {
     return (
         <div className="mb-6">
             <h2 className="text-xl font-semibold text-center mb-4">{currentDay.day_name}</h2>
-            
+
             <Card className="bg-gray-900 border-gray-800">
                 <CardHeader className="pb-3">
                     <CardTitle className="text-lg flex items-center gap-2">
-                        <Shirt className="w-4 h-4" />
+                        <span>🥋</span>
                         Entrenamiento BJJ
                     </CardTitle>
                 </CardHeader>
@@ -43,13 +42,13 @@ export const BJJTab = ({ currentDay }: BJJTabProps) => {
                             className="min-h-[200px] bg-gray-800 border-gray-700 text-gray-100 placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500"
                         />
                     </div>
-                    
-                    <Button 
+
+                    <Button
                         onClick={handleSave}
                         className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                         disabled={!description.trim()}
                     >
-                        <Save className="w-4 h-4 mr-2" />
+                        <span className="mr-2">💾</span>
                         {isSaved ? 'Guardado ✓' : 'Guardar Entrenamiento'}
                     </Button>
                 </CardContent>

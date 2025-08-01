@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Lightbulb, ShoppingCart } from 'lucide-react'
 import { ShoppingListComponent } from './ShoppingList'
 
 type NutritionSubTab = 'plan' | 'compras'
@@ -34,8 +33,8 @@ export const NutritionSubTabs = ({
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === tab.id
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                             }`}
                     >
                         <span>{tab.icon}</span>
@@ -54,7 +53,7 @@ export const NutritionSubTabs = ({
                         <Card className="bg-gray-900 border-gray-800">
                             <CardHeader className="pb-3">
                                 <CardTitle className="text-sm flex items-center gap-2">
-                                    <Lightbulb className="w-4 h-4" />
+                                    <span>💡</span>
                                     Tips de Preparación
                                 </CardTitle>
                             </CardHeader>

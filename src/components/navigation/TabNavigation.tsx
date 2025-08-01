@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Dumbbell, Utensils, Shirt } from 'lucide-react'
 
 type TabType = "bjj" | "workout" | "nutrition"
 
@@ -20,7 +19,7 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
                     : "bg-gray-800 border-gray-700 hover:bg-gray-700"
                     }`}
             >
-                <Shirt className="w-4 h-4 mr-2" />
+                <span className="mr-2">🥋</span>
                 BJJ
             </Button>
             <Button
@@ -31,7 +30,7 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
                     : "bg-gray-800 border-gray-700 hover:bg-gray-700"
                     }`}
             >
-                <Dumbbell className="w-4 h-4 mr-2" />
+                <span className="mr-2">💪</span>
                 Gym
             </Button>
             <Button
@@ -42,7 +41,7 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
                     : "bg-gray-800 border-gray-700 hover:bg-gray-700"
                     }`}
             >
-                <Utensils className="w-4 h-4 mr-2" />
+                <span className="mr-2">🥗</span>
                 Nutrición
             </Button>
         </div>

@@ -1,7 +1,6 @@
 import { Exercise, BlockType } from '@/domain/types/workout'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Zap, Dumbbell, Timer } from 'lucide-react'
 import { BLOCK_NAMES, BLOCK_ICON_NAMES } from '@/constants/workout-constants'
 import { ExerciseCard } from './ExerciseCard'
 
@@ -10,13 +9,13 @@ const getBlockIcon = (blockType: BlockType) => {
     const iconName = BLOCK_ICON_NAMES[blockType]
     switch (iconName) {
         case 'Zap':
-            return <Zap className="w-4 h-4" />
+            return <span>⚡</span>
         case 'Dumbbell':
-            return <Dumbbell className="w-4 h-4" />
+            return <span>💪</span>
         case 'Timer':
-            return <Timer className="w-4 h-4" />
+            return <span>⏱️</span>
         default:
-            return <Dumbbell className="w-4 h-4" />
+            return <span>💪</span>
     }
 }
 

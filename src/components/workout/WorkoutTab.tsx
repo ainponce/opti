@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Clock, Timer as TimerIcon, X } from 'lucide-react'
 import { BlockType } from '@/domain/types/workout'
 import { ExerciseBlock } from './ExerciseBlock'
 import { WarmupSection } from './WarmupSection'
@@ -97,7 +96,7 @@ export const WorkoutTab = ({
                             className="rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg w-12 h-12 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-red-400"
                             title="Iniciar timer de pausa"
                         >
-                            <TimerIcon className="w-6 h-6 text-white" />
+                            <span className="text-xl">⏱️</span>
                         </button>
                     </div>
 
@@ -107,7 +106,7 @@ export const WorkoutTab = ({
                         onClick={onToggleWarmup}
                         className="w-full mb-4 bg-gray-800 border-gray-700 hover:bg-gray-700"
                     >
-                        <Clock className="w-4 h-4 mr-2" />
+                        <span className="mr-2">🔥</span>
                         {showWarmup ? "Ocultar" : "Mostrar"} Calentamiento
                     </Button>
 
@@ -165,7 +164,7 @@ export const WorkoutTab = ({
                         className="mt-4 p-3 rounded-full bg-gray-700 hover:bg-red-600 text-white transition-colors"
                         title="Cancelar pausa"
                     >
-                        <X className="w-7 h-7" />
+                        <span className="text-2xl">❌</span>
                     </button>
                 </div>
             )}

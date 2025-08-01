@@ -1,7 +1,6 @@
 import { MealReference, MealType } from '@/domain/types/nutrition'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Coffee, Utensils, Apple, Flame } from 'lucide-react'
 import { IngredientsDetail } from './IngredientsDetail'
 import { useState } from 'react'
 
@@ -29,11 +28,11 @@ export const MealCard = ({
   const getMealIcon = (type: MealType) => {
     switch (type) {
       case 'desayuno':
-        return <Coffee className="w-5 h-5" />
+        return <span>☕</span>
       case 'merienda':
-        return <Apple className="w-5 h-5" />
+        return <span>🍎</span>
       default:
-        return <Utensils className="w-5 h-5" />
+        return <span>🍽️</span>
     }
   }
 
@@ -72,7 +71,7 @@ export const MealCard = ({
             </span>
             {calories && (
               <Badge variant="outline" className="text-xs flex items-center gap-1 hover:bg-orange-500/10 hover:border-orange-400 transition-colors">
-                <Flame className="w-3 h-3" />
+                <span>🔥</span>
                 {calories} cal
               </Badge>
             )}
