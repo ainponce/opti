@@ -1,16 +1,18 @@
 import { Button } from '@/components/ui/button'
-import { LogOut, User } from 'lucide-react'
+import { User } from 'lucide-react'
 import { useAuth } from '@/hooks/use-auth'
 import { useUserProfile } from '@/hooks/use-user-profile'
 import { Logo } from '@/components/ui/logo'
+import { BurgerMenu } from '@/components/navigation/BurgerMenu'
 
-export const Header = () => {
-  const { user, signOut } = useAuth()
+interface HeaderProps {
+  onOpenBJJHistory?: () => void
+  onOpenProfile?: () => void
+}
+
+export const Header = ({ onOpenBJJHistory, onOpenProfile }: HeaderProps) => {
+  const { user } = useAuth()
   const { getDisplayName } = useUserProfile()
-
-  const handleSignOut = async () => {
-    await signOut()
-  }
 
   const displayName = getDisplayName()
 
@@ -34,14 +36,11 @@ export const Header = () => {
             <span className="truncate max-w-[120px]">{displayName}</span>
           </div>
 
-          <Button
-            onClick={handleSignOut}
-            variant="outline"
-            size="sm"
-            className="bg-gray-800 border-gray-700 hover:bg-gray-700 text-gray-300 flex-shrink-0"
-          >
-            <LogOut className="w-4 h-4" />
-          </Button>
+          {/* Burger Menu for mobile navigation */}
+          <BurgerMenu
+            onOpenBJJHistory={onOpenBJJHistory || (() => { })}
+            onOpenProfile={onOpenProfile || (() => { })}
+          />
         </div>
       )}
     </div>
