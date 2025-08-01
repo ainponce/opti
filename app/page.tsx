@@ -6,28 +6,11 @@ import { useWorkout } from "@/hooks/use-workout"
 import { useNutrition } from "@/hooks/use-nutrition"
 import { DayNavigation } from "@/components/navigation/DayNavigation"
 import { TabNavigation } from "@/components/navigation/TabNavigation"
-import dynamic from "next/dynamic"
-
-// Code splitting - lazy load heavy components
-const WorkoutTab = dynamic(() => import("@/components/workout/WorkoutTab").then(mod => ({ default: mod.WorkoutTab })), {
-  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
-})
-
-const BJJTab = dynamic(() => import("@/components/workout/BJJTab").then(mod => ({ default: mod.BJJTab })), {
-  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
-})
-
-const BJJHistory = dynamic(() => import("@/components/workout/BJJHistory").then(mod => ({ default: mod.BJJHistory })), {
-  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
-})
-
-const NutritionTab = dynamic(() => import("@/components/nutrition/NutritionTab").then(mod => ({ default: mod.NutritionTab })), {
-  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
-})
-
-const ProfileTab = dynamic(() => import("@/components/profile/ProfileTab").then(mod => ({ default: mod.ProfileTab })), {
-  loading: () => <div className="animate-pulse bg-gray-800 rounded-lg h-64"></div>
-})
+import { WorkoutTab } from "@/components/workout/WorkoutTab"
+import { BJJTab } from "@/components/workout/BJJTab"
+import { BJJHistory } from "@/components/workout/BJJHistory"
+import { NutritionTab } from "@/components/nutrition/NutritionTab"
+import { ProfileTab } from "@/components/profile/ProfileTab"
 
 import { AuthGuard } from "@/components/auth/AuthGuard"
 import { Header } from "@/components/auth/Header"

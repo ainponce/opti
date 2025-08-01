@@ -147,4 +147,6 @@ export const BJJTab = ({ currentDay }: BJJTabProps) => {
             </div>
         </div>
     )
-} 
+}
+
+export default BJJTab

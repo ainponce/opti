@@ -150,4 +150,6 @@ export const ProfileTab = ({ onBack }: ProfileTabProps) => {
             </Card>
         </div>
     )
-} 
+}
+
+export default ProfileTab

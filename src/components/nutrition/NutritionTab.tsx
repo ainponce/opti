@@ -57,4 +57,6 @@ export const NutritionTab = ({
             </NutritionSubTabs>
         </div>
     )
-} 
+}
+
+export default NutritionTab

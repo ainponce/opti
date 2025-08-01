@@ -146,4 +146,6 @@ export const BJJHistory = ({ onBack }: BJJHistoryProps) => {
             )}
         </div>
     )
-} 
+}
+
+export default BJJHistory
