@@ -45,7 +45,7 @@ export const BurgerMenu = ({ onOpenBJJHistory, onOpenProfile }: BurgerMenuProps)
                 onClick={handleToggleMenu}
                 variant="ghost"
                 size="sm"
-                className="p-2 pt-safe text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200 transform hover:scale-110"
+                className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200 transform hover:scale-110"
                 aria-label="Abrir menú"
             >
                 {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -61,7 +61,7 @@ export const BurgerMenu = ({ onOpenBJJHistory, onOpenProfile }: BurgerMenuProps)
 
                 {/* Menu Panel */}
                 <div className={`absolute top-0 right-0 w-64 h-full bg-gray-900 border-l border-gray-800 shadow-xl transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                    <div className="p-4">
+                    <div className="p-4 pt-safe">
                         {/* Profile Header */}
                         <div className="flex items-center gap-3 mb-6 p-3 bg-gray-800 rounded-lg">
                             <Logo size="sm" />
