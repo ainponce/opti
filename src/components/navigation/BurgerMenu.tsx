@@ -45,7 +45,7 @@ export const BurgerMenu = ({ onOpenBJJHistory, onOpenProfile }: BurgerMenuProps)
                 onClick={handleToggleMenu}
                 variant="ghost"
                 size="sm"
-                className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200 transform hover:scale-110"
+                className="p-2 pt-safe text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-200 transform hover:scale-110"
                 aria-label="Abrir menú"
             >
                 {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -70,7 +70,6 @@ export const BurgerMenu = ({ onOpenBJJHistory, onOpenProfile }: BurgerMenuProps)
                                     <User className="w-4 h-4 flex-shrink-0" />
                                     <span className="truncate font-medium">{getDisplayName()}</span>
                                 </div>
-                                <p className="text-xs text-gray-400 truncate">{user?.email}</p>
                             </div>
                         </div>
 
