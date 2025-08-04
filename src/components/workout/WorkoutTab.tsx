@@ -137,15 +137,15 @@ export const WorkoutTab = ({
                     </div>
 
                     {/* Guidelines */}
-                    <Card className="mt-6 bg-gray-900 border-gray-800">
+                    <Card className="mt-6 bg-orange-600 border-orange-700">
                         <CardHeader className="pb-3">
-                            <CardTitle className="text-sm">Pautas de Intensidad</CardTitle>
+                            <CardTitle className="text-sm text-white">Pautas de Intensidad</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <div className="text-xs text-gray-400">
+                            <div className="text-xs text-orange-100">
                                 <strong>Pausas:</strong> {intensityGuidelines.pausas}
                             </div>
-                            <div className="text-xs text-gray-400">
+                            <div className="text-xs text-orange-100">
                                 <strong>RIR:</strong> {units.rir_definition}
                             </div>
                         </CardContent>

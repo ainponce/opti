@@ -50,16 +50,16 @@ export const NutritionSubTabs = ({
                         {children}
 
                         {/* Tips */}
-                        <Card className="bg-gray-900 border-gray-800">
+                        <Card className="bg-orange-600 border-orange-700">
                             <CardHeader className="pb-3">
-                                <CardTitle className="text-sm flex items-center gap-2">
+                                <CardTitle className="text-sm flex items-center gap-2 text-white">
                                     <span>💡</span>
                                     Tips de Preparación
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-2">
                                 {getPrepTips(3).map((tip, index) => (
-                                    <div key={index} className="text-xs text-gray-400">
+                                    <div key={index} className="text-xs text-orange-100">
                                         • {tip.replace(/_/g, " ")}
                                     </div>
                                 ))}
