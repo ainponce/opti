@@ -136,10 +136,10 @@ export const BJJTab = ({ currentDay }: BJJTabProps) => {
             </Card>
 
             {/* Tip informativo */}
-            <div className="mt-4 p-3 bg-blue-900/20 border border-blue-800/30 rounded-lg">
+            <div className="mt-4 p-3 bg-orange-900/20 border border-orange-800/30 rounded-lg">
                 <div className="flex items-start gap-2">
-                    <span className="text-blue-400 text-sm mt-0.5">💡</span>
-                    <div className="text-sm text-blue-300">
+                    <span className="text-orange-400 text-sm mt-0.5">💡</span>
+                    <div className="text-sm text-orange-300">
                         <p className="font-medium mb-1">Tip:</p>
                         <p>Esta es una nota por día de entrenamiento. Para un análisis más efectivo, piensa bien antes de guardar. Si ya tienes una nota para hoy, se reemplazará con la nueva.</p>
                     </div>
